@@ -8,6 +8,9 @@ class Casino{
         Casino(){
             balance = 500;
         }
+        int checkMoney(){
+            return balance;
+        }
         void loseMoney(int amount){
             balance -= amount;
         }

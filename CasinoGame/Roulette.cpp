@@ -34,7 +34,7 @@ class Roulette{
             return false;
         }
         bool checkForHub(string s){
-            if(s == "lobby" || s == "exit"){
+            if(s == "hub" || s == "exit"){
                 return true;
             }
             return false;
