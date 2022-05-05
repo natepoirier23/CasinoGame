@@ -20,6 +20,13 @@ class Casino{
             }
             return false;
         }
+        bool checkForExit(string s){
+            if(s == "exit"){
+                return true;
+            }
+            return false;
+        }
+
         Roulette createRoulette(){
             return Roulette();
         }

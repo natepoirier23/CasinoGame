@@ -33,6 +33,12 @@ class Roulette{
             }
             return false;
         }
+        bool checkForHub(string s){
+            if(s == "lobby" || s == "exit"){
+                return true;
+            }
+            return false;
+        }
         vector<bool> playGame(char c,int n){
             //True is a win, false is a loss
             if(playGame(n) && playGame(c)){
