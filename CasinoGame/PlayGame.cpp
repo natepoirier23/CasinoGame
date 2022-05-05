@@ -29,15 +29,57 @@ int main(){
                 if(roulette.checkForHub(s)){
                     break;
                 }
+                else if(s != "play"){
+                    cout << "Invalid entry. \n \n";
+                }
                 else{
-                    cout << "\nEnter your bet: ";
-                    int bet;
+                    cout << "\nEnter your bet: \n";
+                    int bet = 0;
                     cin >> bet;
-                    if(bet > casino.checkMoney() || bet < 1){
-                        cout << "\nInvalid money amount.\n";
+                    if(bet <= casino.checkMoney() && bet >= 1){
+                        cout << "Enter what you would like to bet on! (b or r, 1-38) You can leave either field empty by entering a '.' or include both. \n";
+                        char color;
+                        int guess;
+                        cin >> color >> guess;
+                        if(color == 'r' || color == 'b' && guess <= 38 && guess > 0){
+                            vector<bool> result = roulette.playGame(color,guess);
+                            if(result[0] == true && result[1] == true){
+                                casino.winMoney(bet * 5);
+                                cout << "\nYou win $" << bet*5 << "!\n";
+                            }
+                            else{
+                                casino.loseMoney(bet);
+                                cout << "\nYou lose $" << bet << "! Better luck next time.\n";
+                            }
+                        }
+                        else if(color == '.' && guess <= 38 && guess > 0){
+                            bool result = roulette.playGame(guess);
+                            if(result == true){
+                                casino.winMoney(bet * 3);
+                                cout << "\nYou win $" << bet*3 << "!\n";
+                            }
+                            else{
+                                casino.loseMoney(bet);
+                                cout << "\nYou lose $" << bet << "! Better luck next time.\n";
+                            }
+                        }
+                        else if(color == 'r' || color == 'b' && guess == '.'){
+                            bool result = roulette.playGame(color);
+                            if(result == true){
+                                casino.winMoney(bet * 1.5);
+                                cout << "\nYou win $" << bet*1.5 << "!\n";
+                            }
+                            else{
+                                casino.loseMoney(bet);
+                                cout << "\nYou lose $" << bet << "! Better luck next time.\n";
+                            }
+                        }
+                        else{
+                            cout << "\nInvalid entry. Please re-enter bet and what you are betting on.\n\n";
+                        }
                     }
                     else{
-                        cout << "Enter what you would like to bet on! (b or r";
+                        cout << "\nInvalid money amount.\n";
                     }
                 }
             }
