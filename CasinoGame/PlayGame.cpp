@@ -168,7 +168,7 @@ int main(){
                     int result = slots.playGame();
                     if(result == 0){
                         casino.loseMoney(bet);
-                        cout << "\nYou lose $" << bet << "! Better luck next time.\n";
+                        cout << "\nYou lose $" << bet << "! Better luck next time.\n\n";
                     }
                     else if(result == 1){
                         casino.winMoney(bet*3);
@@ -180,6 +180,7 @@ int main(){
                     }
                 }
             }
+            cout << "Heading back to the lobby... \n\n";
         }
         else if(input == "blackjack"){
 
