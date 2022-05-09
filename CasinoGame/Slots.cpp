@@ -36,35 +36,44 @@ class Slots{
         int playGame(){
             //0 is a loss, 1 is a win, and 7 is a jackpot
             createBoard();
+            
+            //first row match
             if((answerBoard[0][0] = answerBoard[0][1]) && (answerBoard[0][0] = answerBoard[0][2])){
                 if(answerBoard[0][0] = 7){
                     return 7;
                 }
                 return 1;
             }
+            //second row match
             else if((answerBoard[1][0] = answerBoard[1][1]) && (answerBoard[1][0] = answerBoard[1][2])){
                 if(answerBoard[1][0] = 7){
                     return 7;
                 }
                 return 1;
             }
+            //third row match
             else if((answerBoard[2][0] = answerBoard[2][1]) && (answerBoard[2][0] = answerBoard[2][2])){
                 if(answerBoard[2][0] = 7){
                     return 7;
                 }
                 return 1;
             }
+            //diagonal top left to bottom right match
             else if((answerBoard[0][0] = answerBoard[1][1]) && (answerBoard[0][0] = answerBoard[2][2])){
                 if(answerBoard[0][0] = 7){
                     return 7;
                 }
                 return 1;
             }
+            //diagonal top right to bottom left match
             else if((answerBoard[0][2] = answerBoard[1][1]) && (answerBoard[0][2] = answerBoard[2][0])){
                 if(answerBoard[0][2] = 7){
                     return 7;
                 }
                 return 1;
+            }
+            else{
+                return 0;
             }
         }
 };
