@@ -138,7 +138,7 @@ int main(){
         else if(input == "slots"){
             Slots slots = casino.createSlots();
             while(!casino.gameOver()){
-                cout << "Welcome to slots! You can pick a roll a chance to earn x3 or \n" << "you can get lucky 7's to win x10!\n";
+                cout << "Welcome to slots! You can roll for a chance to earn x3 or \n" << "you can get lucky 7's to win x10!\n";
                 cout << "You have $" << casino.checkMoney() << ". Enter 'play', or enter hub or exit to leave : \n\n";
                 string s;
                 cin >> s;
@@ -168,12 +168,15 @@ int main(){
                     int result = slots.playGame();
                     if(result == 0){
                         casino.loseMoney(bet);
+                        cout << "\nYou lose $" << bet << "! Better luck next time.\n";
                     }
                     else if(result == 1){
                         casino.winMoney(bet*3);
+                        cout << "\nYou win $" << bet*3 << "!\n";
                     }
                     else if(result == 7){
                         casino.winMoney(bet*10);
+                        cout << "\nYou win $" << bet*10 << "!\n";
                     }
                 }
             }

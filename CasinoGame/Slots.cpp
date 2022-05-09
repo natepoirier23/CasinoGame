@@ -25,7 +25,7 @@ class Slots{
             return false;
         }
 
-        vector<vector<char>> createBoard(){
+        void createBoard(){
             for(int i=0;i < 3;i++){
                 for(int x=0;x<3;x++){
                     answerBoard[i][x] = randomChar();
@@ -33,10 +33,20 @@ class Slots{
             }
         }
 
+        void printBoard(){
+            for(int i=0;i < 3;i++){
+                for(int x=0;x<3;x++){
+                    cout << "[" << answerBoard[i][x] << "]";
+                }
+                cout << "\n";
+            }
+        }
+
         int playGame(){
             //0 is a loss, 1 is a win, and 7 is a jackpot
             createBoard();
-            
+            printBoard();
+
             //first row match
             if((answerBoard[0][0] = answerBoard[0][1]) && (answerBoard[0][0] = answerBoard[0][2])){
                 if(answerBoard[0][0] = 7){
