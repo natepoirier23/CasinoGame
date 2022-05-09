@@ -6,40 +6,48 @@ using namespace std;
 class Blackjack{
     private:
         char deck[52];
-        char numbers[9] = {'2','3','4','5','6','7','8','9','10'};
+        //1 stands for 10
+        char numbers[9] = {'2','3','4','5','6','7','8','9','1'};
         char faceCards[4] = {'J','Q','K','A'};
     public:
-        Blackjack(){}
+        Blackjack(){
+            createDeck();
+        }
 
         void createDeck(){
             int counter = 0;
             for(int i = 0;i<9;i++){
-                deck[i] = numbers[i];
-                cout << deck[i];
+                deck[counter] = numbers[i];
+                counter++;
             }
             for(int i = 0;i<4;i++){
-                deck[i+9] = faceCards[i];
+                deck[counter] = faceCards[i];
+                counter++;
             }
             for(int i = 0;i<9;i++){
-                deck[i+13] = numbers[i];
-                cout << deck[i];
+                deck[counter] = numbers[i];
+                counter++;
             }
             for(int i = 0;i<4;i++){
-                deck[i+22] = faceCards[i];
+                deck[counter] = faceCards[i];
+                counter++;
             }
             for(int i = 0;i<9;i++){
-                deck[i+26] = numbers[i];
-                cout << deck[i];
+                deck[counter] = numbers[i];
+                counter++;
             }
             for(int i = 0;i<4;i++){
-                deck[i+35] = faceCards[i];
+                deck[counter] = faceCards[i];
+                counter++;
             }
             for(int i = 0;i<9;i++){
-                deck[i+39] = numbers[i];
-                cout << deck[i];
+                deck[counter] = numbers[i];
+                counter++;
             }
             for(int i = 0;i<4;i++){
-                deck[i+48] = faceCards[i];
+                deck[counter] = faceCards[i];
+                counter++;
             }
         }
+        
 };

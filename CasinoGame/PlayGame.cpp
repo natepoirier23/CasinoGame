@@ -183,6 +183,7 @@ int main(){
             cout << "Heading back to the lobby... \n\n";
         }
         else if(input == "blackjack"){
+            Blackjack blackjack = casino.createBlackjack();
 
         }
         else{
