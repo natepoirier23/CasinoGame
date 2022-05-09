@@ -93,7 +93,7 @@ int main(){
                             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         }
                     }
-                    if(color == 'r' || color == 'b' && guessS <= 38 && guessS > 0){
+                    if((color == 'r' || color == 'b') && guessS <= 38 && guessS > 0){
                         vector<bool> result = roulette.playGame(color,guessS);
                         if(result[0] == true && result[1] == true){
                             casino.winMoney(bet * 5);
@@ -115,7 +115,7 @@ int main(){
                             cout << "\nYou lose $" << bet << "! Better luck next time.\n";
                         }
                     }
-                    else if(color == 'r' || color == 'b' && guessS == 0){
+                    else if((color == 'r' || color == 'b') && guessS == 0){
                         bool result = roulette.playGame(color);
                         if(result == true){
                             casino.winMoney(bet * 1.5);
