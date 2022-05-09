@@ -1,4 +1,5 @@
 #include "Roulette.cpp"
+#include "Slots.cpp"
 using namespace std;
 
 class Casino{
@@ -32,5 +33,9 @@ class Casino{
 
         Roulette createRoulette(){
             return Roulette();
+        }
+
+        Slots createSlots(){
+            return Slots();
         }
 };

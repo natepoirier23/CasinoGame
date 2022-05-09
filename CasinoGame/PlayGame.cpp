@@ -3,6 +3,7 @@
 #include "Casino.cpp"
 #include <string>
 
+
 using namespace std;
 
 int main(){
@@ -24,7 +25,7 @@ int main(){
             Roulette roulette = casino.createRoulette();
             while(!casino.gameOver()){
                 cout << "Welcome to roulette! You can pick a number 1-36 for a chance to earn x3 or \n" << "you can pick black or red to earn x1.5.\n";
-                cout << "Or, you can bet both for a chance at x5. \n" << "You have $" << casino.checkMoney() << ". Enter play to play, or enter hub or exit to leave : \n\n";
+                cout << "Or, you can bet both for a chance at x5. \n" << "You have $" << casino.checkMoney() << ". Enter 'play', or enter hub or exit to leave : \n\n";
                 string s;
                 cin >> s;
                 if(roulette.checkForHub(s)){
@@ -59,7 +60,7 @@ int main(){
 
                         // Check whether the user entered meaningful input
                         if(color == 'r' || color =='b' || color =='x'){
-                            break; //here is the issue                                    *******************
+                            break; //here is the issue
                         }
                         else{ // otherwise tell the user what went wrong
                             cout << "\nInvalid entry/entries.\n\n";
@@ -129,15 +130,53 @@ int main(){
                     else{
                         cout << "\nInvalid entry. Please re-enter bet and what you are betting on.\n\n";
                     }
-                       
-                    
-                
+    
                 }
             }
             cout << "Heading back to the lobby... \n\n";
         }
         else if(input == "slots"){
+            Slots slots = casino.createSlots();
+            while(!casino.gameOver()){
+                cout << "Welcome to slots! You can pick a roll a chance to earn x3 or \n" << "you can get lucky 7's to win x10!\n";
+                cout << "You have $" << casino.checkMoney() << ". Enter 'play', or enter hub or exit to leave : \n\n";
+                string s;
+                cin >> s;
+                if(slots.checkForHub(s)){
+                    break;
+                }
+                else if(s != "play"){
+                    cout << "Invalid entry. \n \n";
+                }
+                else{
+                    int bet;
+                    while (true) // Loop until user enters a valid input
+                    {
+                        cout << "\nEnter your bet: \n";
+                        cin >> bet;
 
+                        // Check whether the user entered meaningful input
+                        if(bet <= casino.checkMoney() && bet >= 1){
+                            break;
+                        }
+                        else{ // otherwise tell the user what went wrong
+                            cout << "\nInvalid money amount.\n\n";
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        }
+                    }
+                    int result = slots.playGame();
+                    if(result == 0){
+                        casino.loseMoney(bet);
+                    }
+                    else if(result == 1){
+                        casino.winMoney(bet*3);
+                    }
+                    else if(result == 7){
+                        casino.winMoney(bet*10);
+                    }
+                }
+            }
         }
         else if(input == "blackjack"){
 
@@ -145,7 +184,10 @@ int main(){
         else{
             cout << "Invalid option. Please select a game, or type exit to leave.\n";
         }
-    }
+             
+        
 
-    cout << "Thanks for playing!";
+    }
+    
+    cout << "Thanks for playing!"; 
 }
