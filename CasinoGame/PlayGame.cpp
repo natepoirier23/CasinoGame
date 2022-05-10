@@ -184,7 +184,131 @@ int main(){
         }
         else if(input == "blackjack"){
             Blackjack blackjack = casino.createBlackjack();
+            while(!casino.gameOver()){
+                cout << "Welcome to blackjack! You can play for a chance to earn x2 for winning!\n";
+                cout << "You have $" << casino.checkMoney() << ". Enter 'play', or enter 'hub' or 'exit' to leave : \n\n";
+                string s;
+                cin >> s;
+                if(blackjack.checkForHub(s)){
+                    break;
+                }
+                else if(s != "play"){
+                    cout << "Invalid entry. \n \n";
+                }
+                else{
+                    int bet;
+                    while (true) // Loop until user enters a valid input
+                    {
+                        cout << "\nEnter your bet: \n";
+                        cin >> bet;
 
+                        // Check whether the user entered meaningful input
+                        if(bet <= casino.checkMoney() && bet >= 1){
+                            break;
+                        }
+                        else{ // otherwise tell the user what went wrong
+                            cout << "\nInvalid money amount.\n\n";
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        }
+                    }
+
+                    blackjack.playGame();
+                    blackjack.hand.push_back(blackjack.randomCard());
+                    blackjack.hand.push_back(blackjack.randomCard());
+                    if(blackjack.convertHand() == 21){
+                        blackjack.won = true;
+                    }
+                    if(blackjack.convertHand() > 21){
+                        blackjack.bust = true;
+                    }
+                    while(!blackjack.bust && !blackjack.hold && !blackjack.won){
+                        cout << "Here is your hand : \n";
+                        blackjack.printHand();
+                        cout << "\nWill you stand or hit? Type 'stand' or 'hit'.\n";
+                        string choice;
+                        while(true){
+                            cin >> choice;
+                            if(choice != "stand" || choice != "hit"){
+                                cout << "\nInvalid entry\n";
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        if(choice == "stand"){
+                            break;
+                        }
+                        else{
+                            blackjack.hand.push_back(blackjack.randomCard());
+                            if(blackjack.convertHand() == 21){
+                                blackjack.won = true;
+                            }
+                            if(blackjack.convertHand() > 21){
+                                blackjack.bust = true;
+                            }
+                        }
+                    }
+                    if(blackjack.won){
+                        cout << "\nCongrats! You won $" << bet*2 << "!\n";
+                        casino.winMoney(bet*2);
+                    }
+                    else if(blackjack.bust){
+                        cout << "\nToo bad! You lost $" << bet << ".\n";
+                        casino.loseMoney(bet);
+                    }
+                    else{
+                        //dealer playing against you
+                        blackjack.dHand.push_back(blackjack.randomCard());
+                        blackjack.dHand.push_back(blackjack.randomCard());
+                        if(blackjack.convertDHand() == 21){
+                            blackjack.dWon = true;
+                        }
+                        if(blackjack.convertDHand() > 21){
+                            blackjack.dBust = true;
+                        }
+                        while(!blackjack.dBust && !blackjack.dHold && !blackjack.dWon){
+                            cout << "Here is the dealer's hand : \n";
+                            blackjack.printDHand();
+                            if(blackjack.convertDHand() >= 17){
+                                cout << "\nDealer stands.";
+                                break;
+                            }
+                            else{
+                                cout << "\nHit\n";
+                                blackjack.dHand.push_back(blackjack.randomCard());
+                                if(blackjack.convertDHand() == 21){
+                                    blackjack.dWon = true;
+                                }
+                                if(blackjack.convertHand() > 21){
+                                    blackjack.dBust = true;
+                                }
+                            }
+                        }
+                        if(blackjack.dWon){
+                            cout << "\nToo bad! You lost $" << bet << ".\n";
+                            casino.loseMoney(bet);
+                        }
+                        else if(blackjack.dBust){
+                            cout << "\nCongrats! You won $" << bet*2 << "!\n";
+                            casino.winMoney(bet*2);
+                        }
+                        else{
+                            if(blackjack.convertDHand() > blackjack.convertHand()){
+                                cout << "\nToo bad! You lost $" << bet << ".\n";
+                                casino.loseMoney(bet);
+                            }
+                            else if(blackjack.convertDHand() == blackjack.convertHand()){
+                                cout << "\nIts a tie! You get your bet back.\n";
+                            }
+                            else if(blackjack.convertDHand() < blackjack.convertHand()){
+                                cout << "\nCongrats! You won $" << bet*2 << "!\n";
+                                casino.winMoney(bet*2);
+                            }
+                        }
+                    }
+                }
+            }
         }
         else{
             cout << "Invalid option. Please select a game, or type exit to leave.\n";
