@@ -254,6 +254,8 @@ int main(){
                         casino.winMoney(bet*2);
                     }
                     else if(blackjack.bust){
+                        cout << "\n";
+                        blackjack.printHand();
                         cout << "\nToo bad! You lost $" << bet << ".\n";
                         casino.loseMoney(bet);
                     }
@@ -280,7 +282,7 @@ int main(){
                                 if(blackjack.convertDHand() == 21){
                                     blackjack.dWon = true;
                                 }
-                                if(blackjack.convertHand() > 21){
+                                if(blackjack.convertDHand() > 21){
                                     blackjack.dBust = true;
                                 }
                             }

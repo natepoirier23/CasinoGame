@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<random>
+#include<time.h>
 
 using namespace std;
 
@@ -133,6 +134,7 @@ class Blackjack{
         }
 
         void playGame(){
+            srand(time(0));
             bust = false;
             hold = false;
             won = false;
