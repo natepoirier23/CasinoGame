@@ -19,6 +19,7 @@ class Blackjack{
         bool dBust;
         bool dHold;
         bool dWon;
+
         Blackjack(){
             createDeck();
         }
@@ -74,61 +75,64 @@ class Blackjack{
 
         void printHand(){
             for(char c:hand){
-                if(c = '1'){
+                if(c == '1'){
                     cout << "10" << " ";
                 }
-                cout << c << " ";
+                else{
+                    cout << c << " ";
+                }
             }
         }
 
         void printDHand(){
             for(char c:dHand){
-                if(c = '1'){
+                if(c == '1'){
                     cout << "10" << " ";
                 }
-                cout << c << " ";
+                else{
+                    cout << c << " ";
+                }
             }
+        }
+        int convertDHand(){
+            int temp = 0;
+            for(int i=0;i < dHand.size();i++){
+                if(dHand[i] == '1'){
+                    temp +=10;
+                }
+                else if(dHand[i] == 'A'){
+                    temp+=11;
+                }
+                else if(dHand[i] == 'J' || dHand[i] == 'Q' || dHand[i] == 'K'){
+                    temp+=10;
+                }
+                else{
+                    temp += (int)dHand[i]-48;
+                }
+            }
+            return temp;
         }
 
         int convertHand(){
-            int temp;
-            for(char c:hand){
-                switch(c){
-                    case '1':
-                    case 'J':
-                    case 'Q':
-                    case 'K':
-                        temp += 10;
-                        break;
-                    case 'A':
-                        temp += 11;
-                        break;
-                    default:
-                        temp += c;
+            int temp = 0;
+            for(int i=0;i < hand.size();i++){
+                if(hand[i] == '1'){
+                    temp +=10;
+                }
+                else if(hand[i] == 'A'){
+                    temp+=11;
+                }
+                else if(hand[i] == 'J' || hand[i] == 'Q' || hand[i] == 'K'){
+                    temp+=10;
+                }
+                else{
+                    temp += (int)hand[i]-48;
                 }
             }
+            return temp;
         }
 
-        int convertDHand(){
-            int temp;
-            for(char c:dHand){
-                switch(c){
-                    case '1':
-                    case 'J':
-                    case 'Q':
-                    case 'K':
-                        temp += 10;
-                        break;
-                    case 'A':
-                        temp += 11;
-                        break;
-                    default:
-                        temp += c;
-                }
-            }
-        }
-
-        bool playGame(){
+        void playGame(){
             bust = false;
             hold = false;
             won = false;

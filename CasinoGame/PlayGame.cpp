@@ -229,7 +229,7 @@ int main(){
                         string choice;
                         while(true){
                             cin >> choice;
-                            if(choice != "stand" || choice != "hit"){
+                            if(choice != "stand" && choice != "hit"){
                                 cout << "\nInvalid entry\n";
                             }
                             else{
